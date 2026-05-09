@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korede Joshua | Executive Assistant & Strategic Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A0F2C;
+    --deep-navy: #060A1E;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale: #F5E8C0;
+    --cream: #FAF6EE;
+    --white: #FFFFFF;
+    --grey: #8A8FA8;
+    --text: #1C1F35;
+    --card-bg: rgba(255,255,255,0.04);
+    --border: rgba(201,168,76,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s ease, width 0.3s, height 0.3s;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(6,10,30,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--white); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--grey);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
+    background: var(--gold); transform: scaleX(0);
+    transition: transform 0.3s; transform-origin: left;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* HAMBURGER */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; background: none; border: none; padding: 5px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: all 0.3s; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+  .hero-lines {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(201,168,76,0.03) 80px);
+  }
+  .hero-left { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px; font-weight: 600;
+    display: flex; align-items: center; gap: 12px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: var(--white);
+    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 300;
+  }
+  .hero-title {
+    font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--grey); margin-top: 18px; font-weight: 500;
+    opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+  .hero-divider {
+    width: 60px; height: 1px; background: var(--gold);
+    margin: 28px 0;
+    opacity: 0; animation: fadeWidth 0.8s ease 0.9s forwards;
+  }
+  .hero-tagline {
+    font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.65);
+    max-width: 460px; font-weight: 300;
+    opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+  .hero-ctas {
+    display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s ease 1.3s forwards;
+  }
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--gold);
+    color: var(--deep-navy);
+    text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
+    transition: all 0.3s; border: none; cursor: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    padding: 13px 32px;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+    transition: all 0.3s; background: transparent; cursor: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 52px;
+    opacity: 0; animation: fadeUp 0.8s ease 1.5s forwards;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 600; color: var(--gold); line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); margin-top: 4px; }
+
+  .hero-right {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; animation: fadeIn 1s ease 0.8s forwards;
+  }
+  .photo-frame {
+    position: relative; width: 400px; height: 500px;
+  }
+  .photo-frame::before {
+    content: '';
+    position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px;
+    border: 1px solid var(--border);
+    z-index: 0;
+  }
+  .photo-frame::after {
+    content: '';
+    position: absolute; top: -12px; right: -12px;
+    width: 80px; height: 80px;
+    border-top: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
+  }
+  .photo-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+    position: relative; z-index: 1;
+    filter: grayscale(15%) contrast(1.05);
+  }
+  .photo-badge {
+    position: absolute; bottom: -24px; left: -24px;
+    background: var(--gold);
+    color: var(--deep-navy);
+    padding: 16px 20px;
+    z-index: 3;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .available-dot {
+    width: 8px; height: 8px; background: #4ade80;
+    border-radius: 50%; display: inline-block; margin-right: 6px;
+    animation: pulse-green 2s infinite;
+  }
+
+  /* SCROLLING TICKER */
+  .ticker-wrap {
+    background: var(--gold);
+    overflow: hidden;
+    padding: 12px 0;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+  }
+  .ticker-item {
+    display: inline-block;
+    font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--deep-navy); font-weight: 700;
+    margin-right: 60px;
+  }
+  .ticker-item::before { content: '◆  '; }
+
+  /* SECTION STYLES */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 0.68rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px; font-weight: 700;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white);
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-divider {
+    width: 50px; height: 1px; background: var(--gold); margin: 24px 0;
+  }
+
+  /* ABOUT */
+  #about { background: var(--deep-navy); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px; align-items: start; margin-top: 60px;
+  }
+  .about-text { font-size: 1.05rem; line-height: 1.9; color: rgba(255,255,255,0.65); font-weight: 300; }
+  .about-text p + p { margin-top: 20px; }
+  .about-text strong { color: var(--gold); font-weight: 600; }
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-style: italic;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    border-left: 2px solid var(--gold);
+    padding-left: 28px; margin-top: 32px;
+  }
+  .values-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .value-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 24px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .value-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .value-icon { font-size: 1.5rem; margin-bottom: 10px; }
+  .value-title { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+  .value-desc { font-size: 0.88rem; color: var(--grey); line-height: 1.6; }
+
+  /* SKILLS */
+  #skills { background: var(--navy); }
+  .skills-container { margin-top: 60px; }
+  .skills-category { margin-bottom: 48px; }
+  .skills-cat-title {
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--grey); margin-bottom: 16px; font-weight: 600;
+  }
+  .skills-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .skill-tag {
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    font-size: 0.8rem; letter-spacing: 1px;
+    color: rgba(255,255,255,0.8);
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+  .skill-tag:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.1);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+  .skill-tag.featured {
+    background: rgba(201,168,76,0.12);
+    border-color: rgba(201,168,76,0.5);
+    color: var(--gold-light);
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--deep-navy); }
+  .timeline { margin-top: 60px; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+  .timeline-item {
+    padding-left: 40px; position: relative;
+    margin-bottom: 56px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -4px; top: 6px;
+    width: 9px; height: 9px;
+    background: var(--gold); border-radius: 50%;
+    box-shadow: 0 0 12px rgba(201,168,76,0.5);
+  }
+  .timeline-period {
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 8px;
+  }
+  .timeline-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400; color: var(--white); margin-bottom: 4px;
+  }
+  .timeline-company {
+    font-size: 0.85rem; color: var(--grey); margin-bottom: 20px; font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .company-badge {
+    font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase;
+    background: rgba(201,168,76,0.15); border: 1px solid var(--border);
+    color: var(--gold); padding: 3px 10px;
+  }
+  .timeline-points { list-style: none; }
+  .timeline-points li {
+    font-size: 0.9rem; color: rgba(255,255,255,0.6);
+    line-height: 1.7; padding: 6px 0;
+    padding-left: 16px; position: relative;
+    font-weight: 300;
+  }
+  .timeline-points li::before {
+    content: '→';
+    position: absolute; left: 0; color: var(--gold); font-size: 0.8rem;
+  }
+
+  /* VIDEO SECTION */
+  #intro-video { background: var(--navy); }
+  .video-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center; margin-top: 60px;
+  }
+  .video-container {
+    position: relative;
+    background: rgba(201,168,76,0.05);
+    border: 1px solid var(--border);
+    aspect-ratio: 16/9;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    cursor: none;
+  }
+  .video-container::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent);
+  }
+  .video-container video {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .video-overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: rgba(6,10,30,0.7);
+    transition: opacity 0.3s;
+  }
+  .play-btn {
+    width: 72px; height: 72px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: none; transition: all 0.3s;
+    background: rgba(201,168,76,0.15);
+    margin-bottom: 16px;
+  }
+  .play-btn:hover { background: var(--gold); transform: scale(1.1); }
+  .play-btn svg { fill: var(--gold); transition: fill 0.3s; }
+  .play-btn:hover svg { fill: var(--deep-navy); }
+  .video-label {
+    font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--grey); font-weight: 600;
+  }
+  .video-note {
+    font-size: 0.8rem; color: var(--grey); margin-top: 16px;
+    font-style: italic; line-height: 1.6;
+    border-top: 1px solid var(--border); padding-top: 16px;
+  }
+  .elevator-speech {
+    background: var(--card-bg); border: 1px solid var(--border);
+    padding: 32px;
+  }
+  .speech-title {
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); font-weight: 700; margin-bottom: 20px;
+  }
+  .speech-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-style: italic;
+    color: rgba(255,255,255,0.85); line-height: 1.9;
+  }
+  .speech-text strong { color: var(--gold); font-style: normal; }
+
+  /* CERTIFICATIONS */
+  #certifications { background: var(--deep-navy); }
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px; margin-top: 60px;
+  }
+  .cert-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .cert-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0);
+    transition: transform 0.3s; transform-origin: left;
+  }
+  .cert-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .cert-card:hover::before { transform: scaleX(1); }
+  .cert-year {
+    font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px; font-weight: 700;
+  }
+  .cert-name {
+    font-size: 1rem; color: var(--white); font-weight: 500; line-height: 1.4;
+  }
+  .cert-org { font-size: 0.8rem; color: var(--grey); margin-top: 6px; }
+
+  /* CONTACT */
+  #contact {
+    background: var(--navy);
+    text-align: center;
+  }
+  .contact-inner { max-width: 640px; margin: 0 auto; }
+  .contact-email {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    color: var(--gold); margin-top: 32px;
+    text-decoration: none; display: block;
+    transition: opacity 0.3s;
+  }
+  .contact-email:hover { opacity: 0.7; }
+  .contact-details {
+    display: flex; justify-content: center; gap: 40px;
+    margin-top: 28px; flex-wrap: wrap;
+  }
+  .contact-item {
+    font-size: 0.82rem; color: var(--grey); letter-spacing: 1px;
+  }
+  .contact-item span { color: rgba(255,255,255,0.6); }
+  .social-links { display: flex; justify-content: center; gap: 16px; margin-top: 32px; }
+  .social-link {
+    width: 44px; height: 44px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--grey); text-decoration: none;
+    font-size: 0.75rem; letter-spacing: 1px; font-weight: 600;
+    transition: all 0.3s;
+  }
+  .social-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.1); }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep-navy);
+    border-top: 1px solid var(--border);
+    padding: 28px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: var(--grey); letter-spacing: 1px;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--gold); font-weight: 600;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeWidth {
+    from { opacity: 0; width: 0; }
+    to { opacity: 1; width: 60px; }
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE NAV */
+  .nav-menu { display: flex; }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .hamburger { display: flex; }
+    .nav-menu {
+      position: fixed; top: 70px; left: 0; right: 0;
+      background: var(--deep-navy);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      flex-direction: column;
+      transform: translateY(-120%);
+      transition: transform 0.4s ease;
+      z-index: 99;
+    }
+    .nav-menu.open { transform: translateY(0); }
+    .nav-links { flex-direction: column; gap: 24px; }
+    #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+    .hero-right { order: -1; }
+    .photo-frame { width: 280px; height: 360px; margin: 0 auto; }
+    section { padding: 70px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .video-layout { grid-template-columns: 1fr; gap: 40px; }
+    footer { padding: 20px 24px; flex-direction: column; text-align: center; }
+    .hero-stats { gap: 28px; }
+    .values-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">KJ<span>.</span></a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-menu" id="navMenu">
+    <ul class="nav-links">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+      <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+      <li><a href="#intro-video" onclick="closeMenu()">Intro</a></li>
+      <li><a href="#certifications" onclick="closeMenu()">Credentials</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Executive Assistant</div>
+    <h1 class="hero-name">Korede<br><em>Joshua</em></h1>
+    <p class="hero-title">Strategic Partner · C-Suite Support · Lagos, Nigeria</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">
+      Five years of precision, discretion, and operational excellence — turning executive vision into flawless execution. The partner that keeps leadership focused on what matters most.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Work With Me</a>
+      <a href="#experience" class="btn-outline">View Experience</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Industries</div>
+      </div>
+      <div>
+        <div class="stat-num">C-Suite</div>
+        <div class="stat-label">Level Support</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-frame">
+      <!-- Replace 'assets/profile.jpg' with your actual image after download -->
+      <img src="assets/profile.jpg" alt="Korede Joshua – Executive Assistant" onerror="this.style.background='linear-gradient(135deg, #1C1F35, #0A0F2C)'; this.style.display='block';">
+      <div class="photo-badge">
+        <span class="available-dot"></span>Available for Hire<br>Lagos, Nigeria
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item">Calendar & Diary Management</span>
+    <span class="ticker-item">C-Suite Executive Support</span>
+    <span class="ticker-item">Stakeholder Liaison</span>
+    <span class="ticker-item">Board-Level Presentations</span>
+    <span class="ticker-item">Travel & Logistics</span>
+    <span class="ticker-item">Real Estate | Food Logistics | Events</span>
+    <span class="ticker-item">Google Workspace | Asana | MS 365</span>
+    <span class="ticker-item">Operational Excellence</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">Calendar & Diary Management</span>
+    <span class="ticker-item">C-Suite Executive Support</span>
+    <span class="ticker-item">Stakeholder Liaison</span>
+    <span class="ticker-item">Board-Level Presentations</span>
+    <span class="ticker-item">Travel & Logistics</span>
+    <span class="ticker-item">Real Estate | Food Logistics | Events</span>
+    <span class="ticker-item">Google Workspace | Asana | MS 365</span>
+    <span class="ticker-item">Operational Excellence</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I Am</div>
+  <h2 class="section-title">The Executive Partner<br><em>You've Been Looking For</em></h2>
+  <div class="section-divider"></div>
+  <div class="about-grid reveal">
+    <div>
+      <p class="about-text">
+        <p>I'm <strong>Korede Joshua</strong> — a Strategic Executive Assistant with five years of hands-on experience supporting C-suite leaders and senior directors across <strong>real estate, food logistics, and event planning</strong> in Lagos.</p>
+        <p style="margin-top:16px">I don't just manage calendars and emails. I build the systems, relationships, and operational architecture that allow executives to operate at their absolute best — with full confidence that nothing is falling through the cracks.</p>
+        <p style="margin-top:16px">My edge lies in combining <strong>analytical thinking</strong> (Google Data Analytics certified, QuantumAnalytics trained) with high-touch executive support. I translate ambiguity into action, complex schedules into clarity, and stakeholder chaos into seamless coordination.</p>
+        <div class="about-quote">"The best executive assistants don't just clear the path — they illuminate it."</div>
+      </p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🔒</div>
+        <div class="value-title">Discretion</div>
+        <div class="value-desc">Handling sensitive information with absolute professionalism and confidentiality — especially in high-net-worth environments.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">⚡</div>
+        <div class="value-title">Proactivity</div>
+        <div class="value-desc">Anticipating needs before they become problems. I build systems that prevent fires, not just fight them.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🎯</div>
+        <div class="value-title">Precision</div>
+        <div class="value-desc">Board decks, briefings, and communications crafted to exact standards, every single time.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌐</div>
+        <div class="value-title">Global Mindset</div>
+        <div class="value-desc">Supporting leaders across industries with the systems thinking and cultural fluency demanded by today's fast-moving executive landscape.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title">Skills &amp; <em>Expertise</em></h2>
+  <div class="section-divider"></div>
+  <div class="skills-container reveal">
+    <div class="skills-category">
+      <div class="skills-cat-title">Core Executive Support</div>
+      <div class="skills-tags">
+        <div class="skill-tag featured">Calendar & Diary Management</div>
+        <div class="skill-tag featured">Stakeholder & Board Liaison</div>
+        <div class="skill-tag featured">Executive Reporting & Briefs</div>
+        <div class="skill-tag featured">Confidential Correspondence</div>
+        <div class="skill-tag">Travel & Logistics Planning</div>
+        <div class="skill-tag">Budget & Expense Tracking</div>
+        <div class="skill-tag">Vendor Negotiation</div>
+        <div class="skill-tag">Client Relationship Management</div>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="skills-cat-title">Communication & Content</div>
+      <div class="skills-tags">
+        <div class="skill-tag featured">Pitch Decks & Presentations</div>
+        <div class="skill-tag">Investor Briefing Materials</div>
+        <div class="skill-tag">Internal Memos & Reports</div>
+        <div class="skill-tag">Email Management</div>
+        <div class="skill-tag">Minute Taking</div>
+        <div class="skill-tag">Project & Event Coordination</div>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="skills-cat-title">Tools & Technology</div>
+      <div class="skills-tags">
+        <div class="skill-tag featured">Google Workspace</div>
+        <div class="skill-tag featured">Microsoft 365</div>
+        <div class="skill-tag featured">Asana</div>
+        <div class="skill-tag">Zoom & Virtual Events</div>
+        <div class="skill-tag">Google Sheets & KPI Dashboards</div>
+        <div class="skill-tag">Notion</div>
+        <div class="skill-tag">Slack</div>
+        <div class="skill-tag">CRM Systems</div>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="skills-cat-title">Data & Analytics</div>
+      <div class="skills-tags">
+        <div class="skill-tag">KPI Dashboard Development</div>
+        <div class="skill-tag">Performance Reporting</div>
+        <div class="skill-tag">Data Analysis</div>
+        <div class="skill-tag">Research & Insights</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career Journey</div>
+  <h2 class="section-title">Professional <em>Experience</em></h2>
+  <div class="section-divider"></div>
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="timeline-period">Apr 2025 – Present</div>
+      <div class="timeline-role">Executive Assistant</div>
+      <div class="timeline-company">
+        Blue Square Limited
+        <span class="company-badge">Real Estate</span>
+      </div>
+      <ul class="timeline-points">
+        <li>Supported senior Directors across active real estate development projects, coordinating cross-departmental workflows and ensuring strategic priorities were executed on schedule.</li>
+        <li>Managed complex executive calendars, coordinated high-volume meetings, and organised virtual events for large internal and external audiences using Zoom and Outlook.</li>
+        <li>Built KPI dashboards tracking departmental performance across business units, giving Directors real-time visibility into operational progress.</li>
+        <li>Prepared Board-level presentations, internal memos, and briefing materials; drafted correspondence on behalf of Directors and managed stakeholder communications with precision.</li>
+        <li>Coordinated client-facing campaigns and marketing deliverables, supporting business development and client retention efforts.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-period">Aug 2023 – Nov 2024</div>
+      <div class="timeline-role">Executive Assistant</div>
+      <div class="timeline-company">
+        Fruitage Investment Ltd
+        <span class="company-badge">Food Logistics</span>
+      </div>
+      <ul class="timeline-points">
+        <li>Supported the executive team at a fast-paced food logistics company supplying raw materials to food outlets, managing communications, scheduling, and operational administration.</li>
+        <li>Oversaw multi-channel stakeholder communications and synthesised client feedback into concise briefings that informed leadership decisions.</li>
+        <li>Developed and maintained weekly performance dashboards in Google Sheets, providing consistent visibility into operational and engagement metrics.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-period">Jan 2021 – Jul 2023</div>
+      <div class="timeline-role">Executive Assistant to CEO</div>
+      <div class="timeline-company">
+        SAGE Event Planning Company
+        <span class="company-badge">Events</span>
+      </div>
+      <ul class="timeline-points">
+        <li>Provided direct support to the Chief Executive Officer, managing a high-volume diary, confidential correspondence, and executive-level relationships.</li>
+        <li>Served as the CEO's primary liaison with clients, vendors, and partners — coordinating event logistics, negotiating supplier contracts, and ensuring seamless delivery across all engagements.</li>
+        <li>Prepared investor pitch decks, strategic reports, and executive summaries supporting the CEO in partnership negotiations and key business decisions.</li>
+        <li>Managed travel arrangements, budget tracking, and vendor relationships; maintained strict confidentiality throughout a period of senior leadership transition.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!--
+<section id="intro-video">
+  <div class="section-label">Meet Korede</div>
+  <h2 class="section-title">Watch My <em>Introduction</em></h2>
+  <div class="section-divider"></div>
+  <div class="video-layout reveal">
+    <div>
+      <div class="video-container" id="videoContainer">
+        <!--
+          HOW TO ADD YOUR VIDEO:
+          1. Record your elevator speech (script below)
+          2. Save the video file as: assets/intro.mp4
+          3. Uncomment the <video> tag below
+          4. Remove the overlay div
+        -->
+        <!-- <video controls poster="assets/profile.jpg">
+          <source src="assets/intro.mp4" type="video/mp4">
+        </video> -->
+        <!--
+        <div class="video-overlay">
+          <div class="play-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="video-label">Intro Video · Coming Soon</div>
+        </div>
+      </div>
+      <p class="video-note">
+        📽 Record yourself delivering the elevator speech on the right. Save it as <code>assets/intro.mp4</code> and uncomment the video tag in the HTML to activate this section.
+      </p>
+    </div>
+    <div class="elevator-speech">
+      <div class="speech-title">📌 Your Elevator Speech Script</div>
+      <div class="speech-text">
+        "My name is <strong>Korede Joshua</strong> — and for the past five years, I've been the person that makes sure C-suite executives never have to worry about what's behind them.
+
+        <br><br>I've supported leaders across <strong>real estate, food logistics, and event planning</strong> in Lagos — managing board-level communications, building KPI dashboards, and coordinating high-stakes stakeholder relationships with complete discretion.
+
+        <br><br>What sets me apart isn't just the systems I build — it's the <strong>trust I earn</strong>. When an executive works with me, they gain a strategic partner who anticipates problems before they happen, communicates on their behalf with precision, and keeps their world running flawlessly.
+
+        <br><br>If you're looking for an Executive Assistant who treats your priorities as their own — <strong>I'm ready to talk.</strong>"
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Education &amp; <em>Certifications</em></h2>
+  <div class="section-divider"></div>
+  <div class="certs-grid reveal">
+    <div class="cert-card">
+      <div class="cert-year">2019</div>
+      <div class="cert-name">B.Sc. Biochemistry</div>
+      <div class="cert-org">University of Ibadan, Nigeria</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-year">2026</div>
+      <div class="cert-name">School of Finance Certificate</div>
+      <div class="cert-org">MA Talent Africa</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-year">2024</div>
+      <div class="cert-name">Virtual Assistant Certification</div>
+      <div class="cert-org">ALX Africa</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-year">2023</div>
+      <div class="cert-name">Google Data Analytics</div>
+      <div class="cert-org">Google / Coursera</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-year">2023</div>
+      <div class="cert-name">Data Analyst Certification</div>
+      <div class="cert-org">QuantumAnalytics</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center; display:flex;">Let's Connect</div>
+    <h2 class="section-title reveal">Ready to Work<br>With the <em>Best?</em></h2>
+    <div class="section-divider" style="margin: 24px auto;"></div>
+    <p class="reveal" style="color:rgba(255,255,255,0.5); font-size:0.95rem; line-height:1.8; max-width:480px; margin:0 auto;">
+      Whether you're a CEO seeking a trusted strategic partner or a company building a world-class executive team — I'd love to start a conversation.
+    </p>
+    <a href="mailto:joshuakorede0@gmail.com" class="contact-email reveal">joshuakorede0@gmail.com</a>
+    <div class="contact-details reveal">
+      <div class="contact-item">📍 <span>Lagos, Nigeria</span></div>
+      <div class="contact-item">📞 <span>+234 813 090 8194</span></div>
+    </div>
+    <div class="social-links reveal">
+      <a href="https://ng.linkedin.com/in/korede-joshua" target="_blank" class="social-link">in</a>
+      <a href="https://www.facebook.com/korejosh/" target="_blank" class="social-link">fb</a>
+      <a href="mailto:joshuakorede0@gmail.com" class="social-link">✉</a>
+    </div>
+    <div style="margin-top:40px;" class="reveal">
+      <a href="assets/KoredeJoshua_EA_Resume.pdf" class="btn-primary" download>Download Resume</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">KJ.</div>
+  <div>© 2026 Korede Joshua · Executive Assistant · Lagos, Nigeria</div>
+  <div style="color: var(--border-gold)">Built with precision · Designed to impress</div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, .skill-tag, .cert-card, .value-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+      ring.style.width = '60px'; ring.style.height = '60px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.width = '36px'; ring.style.height = '36px';
+    });
+  });
+
+  // HAMBURGER
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('navMenu');
+  hamburger.addEventListener('click', () => navMenu.classList.toggle('open'));
+  function closeMenu() { navMenu.classList.remove('open'); }
+
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
